@@ -32,7 +32,9 @@ export default function Home() {
         <DataTable data={umkmData} />
       </div>
       <div className="text-secondary bg-secondary-foreground py-6">
-        <h1 className="text-8xl font-bold text-center">LokalKita</h1>
+        <h1 className="text-6xl md:text-8xl font-bold text-center">
+          LokalKita
+        </h1>
         <p className="text-center">&copy; LokalKita 2025</p>
       </div>
     </div>
