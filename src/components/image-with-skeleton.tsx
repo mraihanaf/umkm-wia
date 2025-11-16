@@ -14,6 +14,7 @@ export function ImageWithSkeleton({
   skeletonClassName,
   onLoad,
   src,
+  alt = "",
   ...props
 }: ImageWithSkeletonProps) {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +24,12 @@ export function ImageWithSkeleton({
     const checkImageCache = () => {
       if (typeof window === "undefined" || !src) return;
 
-      const imageUrl = typeof src === "string" ? src : (src as any)?.src || "";
+      let imageUrl = "";
+      if (typeof src === "string") {
+        imageUrl = src;
+      } else if (src && typeof src === "object" && "src" in src) {
+        imageUrl = (src as { src: string }).src;
+      }
 
       if (!imageUrl) return;
 
@@ -62,6 +68,7 @@ export function ImageWithSkeleton({
       <Image
         {...props}
         src={src}
+        alt={alt}
         className={cn(className, isLoading && !isCached && "opacity-0")}
         onLoad={(e) => {
           setIsLoading(false);
@@ -74,9 +81,10 @@ export function ImageWithSkeleton({
 
           if (
             "onLoadingComplete" in props &&
-            typeof (props as any).onLoad === "function"
+            props.onLoadingComplete &&
+            typeof props.onLoadingComplete === "function"
           ) {
-            (props as any).onLoadingComplete(img);
+            props.onLoadingComplete(img);
           }
         }}
         style={{
