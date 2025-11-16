@@ -1,6 +1,6 @@
 "use client";
 import { SiteHeader } from "@/components/site-header";
-import Image from "next/image";
+import { ImageWithSkeleton } from "@/components/image-with-skeleton";
 import { smallBusinessData } from "@/data/umkmData";
 import { DataTable } from "@/components/data-table";
 
@@ -20,12 +20,13 @@ export default function Home() {
               kita sendiri.
             </p>
           </div>
-          <Image
+          <ImageWithSkeleton
             src={"/hero.webp"}
             alt=""
             width={2000}
             height={2000}
             className="hidden lg:block rounded-md"
+            skeletonClassName="rounded-md"
           />
         </div>
         {/* <DataTable data={data} /> */}
@@ -35,7 +36,7 @@ export default function Home() {
         <h1 className="text-6xl text-primary md:text-8xl font-bold text-center">
           LokalKita
         </h1>
-        <p className="text-center">&cscheduley; LokalKita 2025</p>
+        <p className="text-center">LokalKita 2025</p>
       </div>
     </div>
   );

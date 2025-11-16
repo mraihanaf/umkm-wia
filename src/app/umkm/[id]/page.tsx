@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { smallBusinessData } from "@/data/umkmData";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import Image from "next/image";
+import { ImageWithSkeleton } from "@/components/image-with-skeleton";
 
 export default function DetailSmallBusinessPage() {
   const { id } = useParams<{ id: string }>();
@@ -39,12 +39,13 @@ export default function DetailSmallBusinessPage() {
 
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/3 bg-background flex items-center justify-center">
-            <Image
+            <ImageWithSkeleton
               src={business.logo}
               alt={business.businessName}
               height={2000}
               width={2000}
               className="object-cover w-48 h-48 m-6 rounded-xl"
+              skeletonClassName="w-48 h-48 m-6 rounded-xl"
             />
           </div>
 
@@ -84,12 +85,13 @@ export default function DetailSmallBusinessPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {business.products.map((product, index) => (
               <div key={index} className="bg-background rounded-xl shadow p-4">
-                <Image
+                <ImageWithSkeleton
                   src={product.image}
                   alt={product.name}
                   width={400}
                   height={160}
                   className="object-cover w-full h-40 rounded-lg mb-3"
+                  skeletonClassName="w-full h-40 rounded-lg mb-3"
                 />
                 <h3 className="font-semibold">{product.name}</h3>
                 <p className="text-sm text-foreground mt-1">
