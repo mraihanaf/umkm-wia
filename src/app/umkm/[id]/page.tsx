@@ -1,21 +1,21 @@
 "use client";
-// src/pages/DetailUMKMPage.tsx
+// src/pages/DetailSmallBusinessPage.tsx
 // import { useParams } from "react-router-dom";
 import { useParams } from "next/navigation";
-import { umkmData } from "@/data/umkmData";
+import { smallBusinessData } from "@/data/umkmData";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 
-export default function DetailUMKMPage() {
+export default function DetailSmallBusinessPage() {
   const { id } = useParams<{ id: string }>();
-  const umkm = umkmData.find((item) => item.id === id);
+  const business = smallBusinessData.find((item) => item.id === id);
 
-  if (!umkm) {
+  if (!business) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center">
         <h1 className="text-2xl font-semibold text-secondary-foreground">
-          UMKM tidak ditemukan
+          SmallBusiness tidak ditemukan
         </h1>
         <p className="text-foreground mt-2">
           Periksa kembali ID yang kamu akses.
@@ -40,8 +40,8 @@ export default function DetailUMKMPage() {
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/3 bg-background flex items-center justify-center">
             <Image
-              src={umkm.logo_umkm}
-              alt={umkm.nama_usaha}
+              src={business.logo}
+              alt={business.businessName}
               height={2000}
               width={2000}
               className="object-cover w-48 h-48 m-6 rounded-xl"
@@ -50,17 +50,29 @@ export default function DetailUMKMPage() {
 
           <div className="md:w-2/3 p-6">
             <h1 className="text-3xl font-bold text-secondary-foreground mb-2">
-              {umkm.nama_usaha}
+              {business.businessName}
             </h1>
-            <p className="text-foreground italic mb-2">{umkm.jenis}</p>
-            <p className="text-secondary-foreground mb-4">{umkm.deskripsi}</p>
+            <p className="text-foreground italic mb-2">{business.type}</p>
+            <p className="text-secondary-foreground mb-4">
+              {business.description}
+            </p>
 
             <div className="flex flex-wrap gap-3 text-sm text-foreground">
-              <p>Tahun berdiri: {umkm.tahun_berdiri || "-"}</p>
+              <p>
+                Tahun berdiri:{" "}
+                {business.foundedYear && business.foundedYear > 0
+                  ? business.foundedYear
+                  : "Tidak diketahui"}
+              </p>
               {" | "}
-              <p>Pemilik: {umkm.nama_pemilik}</p>
+              <p>Pemilik: {business.ownerName}</p>
               {" | "}
-              <p>Rating: ⭐ {umkm.ratings || "0.0"}</p>
+              <p>
+                Rating: ⭐{" "}
+                {business.ratings && business.ratings > 0
+                  ? business.ratings.toFixed(1)
+                  : "Belum ada rating"}
+              </p>
             </div>
           </div>
         </div>
@@ -70,18 +82,18 @@ export default function DetailUMKMPage() {
             Produk Unggulan
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
-            {umkm.nama_produk.map((produk, index) => (
+            {business.products.map((product, index) => (
               <div key={index} className="bg-background rounded-xl shadow p-4">
                 <Image
-                  src={produk.foto}
-                  alt={produk.nama}
+                  src={product.image}
+                  alt={product.name}
                   width={400}
                   height={160}
                   className="object-cover w-full h-40 rounded-lg mb-3"
                 />
-                <h3 className="font-semibold">{produk.nama}</h3>
+                <h3 className="font-semibold">{product.name}</h3>
                 <p className="text-sm text-foreground mt-1">
-                  Rp{produk.harga.toLocaleString("id-ID")}
+                  Rp{product.price.toLocaleString("id-ID")}
                 </p>
               </div>
             ))}
@@ -93,17 +105,17 @@ export default function DetailUMKMPage() {
             Alamat
           </h2>
           <p className="text-secondary-foreground">
-            {umkm.alamat.nama_jalan} No. {umkm.alamat.nomor}, {umkm.alamat.kota}
-            , {umkm.alamat.kode_pos}
+            {business.address.streetName} No. {business.address.number},{" "}
+            {business.address.city}, {business.address.postalCode}
           </p>
           <br />
-          {/* <UMKMMap
-            lat={umkm.alamat.latitude}
-            lng={umkm.alamat.longitude}
-            nama={umkm.nama_usaha}
+          {/* <SmallBusinessMap
+            lat={business.address.latitude}
+            lng={business.address.longitude}
+            nama={business.businessName}
           /> */}
           <iframe
-            src={umkm.alamat.embed}
+            src={business.address.embed}
             width="600"
             height="450"
             className="border-0 rounded-lg w-full"
@@ -118,10 +130,10 @@ export default function DetailUMKMPage() {
             Jam Operasional
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-secondary-foreground">
-            {umkm.operasional.map((op, i) => (
+            {business.operatingHours.map((schedule, i) => (
               <p key={i}>
-                {op.hari.charAt(0).toUpperCase() + op.hari.slice(1)}:{" "}
-                {op.operasional ? op.jam : "Tutup"}
+                {schedule.day.charAt(0).toUpperCase() + schedule.day.slice(1)}:{" "}
+                {schedule.isOpen ? schedule.hours : "Tutup"}
               </p>
             ))}
           </div>
@@ -132,25 +144,27 @@ export default function DetailUMKMPage() {
             Sosial Media
           </h2>
           <ul className="text-secondary-foreground">
-            {Object.entries(umkm.sosial_media).map(([platform, handle], i) => (
-              <li key={i}>
-                <span className="capitalize">{platform}: </span>
-                <a
-                  href={`https://${handle.replace("@", "instagram.com/")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline"
-                >
-                  {handle}
-                </a>
-              </li>
-            ))}
+            {Object.entries(business.socialMedia).map(
+              ([platform, handle], i) => (
+                <li key={i}>
+                  <span className="capitalize">{platform}: </span>
+                  <a
+                    href={`https://${handle.replace("@", "instagram.com/")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 underline"
+                  >
+                    {handle}
+                  </a>
+                </li>
+              ),
+            )}
           </ul>
         </div>
 
         <div className="border-t p-6 text-sm text-foreground text-right">
-          Terdaftar sejak {umkm.tanggal_dibuat.hari} {umkm.tanggal_dibuat.bulan}{" "}
-          {umkm.tanggal_dibuat.tahun} • {umkm.tanggal_dibuat.jam}
+          Terdaftar sejak {business.createdAt.day} {business.createdAt.month}{" "}
+          {business.createdAt.year} • {business.createdAt.hours}
         </div>
       </div>
     </div>

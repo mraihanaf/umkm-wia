@@ -1,7 +1,7 @@
 "use client";
 import { SiteHeader } from "@/components/site-header";
 import Image from "next/image";
-import { umkmData } from "@/data/umkmData";
+import { smallBusinessData } from "@/data/umkmData";
 import { DataTable } from "@/components/data-table";
 
 export default function Home() {
@@ -29,13 +29,13 @@ export default function Home() {
           />
         </div>
         {/* <DataTable data={data} /> */}
-        <DataTable data={umkmData} />
+        <DataTable data={smallBusinessData} />
       </div>
       <div className="text-secondary bg-secondary-foreground py-6">
         <h1 className="text-6xl text-primary md:text-8xl font-bold text-center">
           LokalKita
         </h1>
-        <p className="text-center">&copy; LokalKita 2025</p>
+        <p className="text-center">&cscheduley; LokalKita 2025</p>
       </div>
     </div>
   );

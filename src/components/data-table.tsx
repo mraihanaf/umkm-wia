@@ -20,7 +20,7 @@ import {
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { UMKM } from "@/data/umkmData";
+import { SmallBusiness } from "@/data/umkmData";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 import { Funnel, Heart, Search } from "lucide-react";
 import { Collapsible, CollapsibleContent } from "./ui/collapsible";
@@ -28,7 +28,7 @@ import { Card, CardContent, CardHeader } from "./ui/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-const multiFilter: FilterFn<UMKM> = (row, columnId, filterValue) => {
+const multiFilter: FilterFn<SmallBusiness> = (row, columnId, filterValue) => {
   if (!filterValue || filterValue.length === 0) return true;
   const cellValue = row.getValue(columnId);
 
@@ -43,26 +43,43 @@ const multiFilter: FilterFn<UMKM> = (row, columnId, filterValue) => {
   return false;
 };
 
-export const columns: ColumnDef<UMKM>[] = [
-  { accessorKey: "nama_usaha", header: "Nama Usaha" },
-  { accessorKey: "jenis", header: "Jenis Usaha", filterFn: multiFilter },
-  { accessorKey: "kategori", header: "Kategori", filterFn: multiFilter },
-  { accessorKey: "nama_pemilik", header: "Pemilik" },
-  { accessorKey: "tahun_berdiri", header: "Tahun Berdiri" },
-  { accessorKey: "ratings.rata_rata", header: "Rating" },
-  { accessorKey: "ratings.jumlah_review", header: "Jumlah Review" },
+export const columns: ColumnDef<SmallBusiness>[] = [
+  { accessorKey: "businessName", header: "Nama Usaha" },
+  { accessorKey: "type", header: "Jenis Usaha", filterFn: multiFilter },
+  { accessorKey: "category", header: "Kategori", filterFn: multiFilter },
+  { accessorKey: "ownerName", header: "Pemilik" },
+  {
+    accessorKey: "foundedYear",
+    header: "Tahun Berdiri",
+    cell: ({ row }) => {
+      const year = row.getValue("foundedYear") as number;
+      return year > 0 ? year : "-";
+    },
+  },
+  {
+    accessorKey: "ratings",
+    header: "Rating",
+    cell: ({ row }) => {
+      const rating = row.getValue("ratings") as number;
+      return rating > 0 ? `⭐ ${rating.toFixed(1)}` : "⭐ 0.0";
+    },
+  },
   { accessorKey: "status", header: "Status" },
   {
-    accessorKey: "pembayaran",
+    accessorKey: "paymentMethods",
     header: "Riwayat Pembayaran",
     filterFn: multiFilter,
   },
-  { accessorKey: "pengiriman", header: "Pengiriman", filterFn: multiFilter },
-  { accessorKey: "alamat", header: "Alamat" },
-  { accessorKey: "deskripsi", header: "Deskripsi" },
+  {
+    accessorKey: "shippingMethods",
+    header: "Pengiriman",
+    filterFn: multiFilter,
+  },
+  { accessorKey: "address", header: "Alamat" },
+  { accessorKey: "description", header: "Deskripsi" },
 ];
 
-export function DataTable({ data: initialData }: { data: UMKM[] }) {
+export function DataTable({ data: initialData }: { data: SmallBusiness[] }) {
   const [data] = React.useState(() => initialData);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -131,12 +148,12 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
     onColumnFiltersChange: setColumnFilters,
     globalFilterFn: (row, _columnId, filterValue) => {
       const search = filterValue.toLowerCase();
-      const { nama_usaha, kategori, nama_pemilik, jenis } = row.original;
+      const { businessName, category, ownerName, type } = row.original;
       return (
-        fuzzyFilter(nama_usaha.toLowerCase(), search) ||
-        fuzzyFilter(kategori.toLowerCase(), search) ||
-        fuzzyFilter(jenis.toLowerCase(), search) ||
-        fuzzyFilter(nama_pemilik.toLowerCase(), search)
+        fuzzyFilter(businessName.toLowerCase(), search) ||
+        fuzzyFilter(category.toLowerCase(), search) ||
+        fuzzyFilter(type.toLowerCase(), search) ||
+        fuzzyFilter(ownerName.toLowerCase(), search)
       );
     },
     filterFns: {
@@ -151,14 +168,14 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-  const allKategori = Array.from(new Set(data.map((d) => d.kategori))).sort();
-  const allJenis = Array.from(new Set(data.map((d) => d.jenis))).sort();
-  const allPembayaran = Array.from(
-    new Set(data.flatMap((d) => d.pembayaran)),
+  const allCategories = Array.from(new Set(data.map((d) => d.category))).sort();
+  const allTypes = Array.from(new Set(data.map((d) => d.type))).sort();
+  const allPaymentMethods = Array.from(
+    new Set(data.flatMap((d) => d.paymentMethods)),
   ).sort();
   console.log(table.getAllColumns());
 
-  const [open, setOpen] = React.useState<boolean>(false);
+  const [isFilterOpen, setIsFilterOpen] = React.useState<boolean>(false);
 
   function toggleFavorite(id?: string | number) {
     if (!id) return;
@@ -205,35 +222,38 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
             {showFavoritesOnly ? "Tampilkan Semua" : "Favorite"}
           </Button>
 
-          <Button variant={"outline"} onClick={() => setOpen(!open)}>
+          <Button
+            variant={"outline"}
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+          >
             <Funnel /> Filter
           </Button>
         </div>
         <div className="flex flex-wrap items-center justify-start gap-3">
-          {allKategori.map((kategori) => {
+          {allCategories.map((category) => {
             const selected =
-              (table.getColumn("kategori")?.getFilterValue() as string[]) ?? [];
-            const isChecked = selected.includes(kategori);
+              (table.getColumn("category")?.getFilterValue() as string[]) ?? [];
+            const isChecked = selected.includes(category);
 
             const handleClick = () => {
               const current =
-                (table.getColumn("kategori")?.getFilterValue() as string[]) ??
+                (table.getColumn("category")?.getFilterValue() as string[]) ??
                 [];
               if (isChecked) {
                 table
-                  .getColumn("kategori")
-                  ?.setFilterValue(current.filter((c) => c !== kategori));
+                  .getColumn("category")
+                  ?.setFilterValue(current.filter((c) => c !== category));
               } else {
                 table
-                  .getColumn("kategori")
-                  ?.setFilterValue([...current, kategori]);
+                  .getColumn("category")
+                  ?.setFilterValue([...current, category]);
               }
               table.setPageIndex(0);
             };
 
             return (
               <Button
-                key={kategori}
+                key={category}
                 type="button"
                 variant={isChecked ? "default" : "outline"}
                 className={`text-sm px-3 py-1.5 transition-all ${
@@ -243,7 +263,7 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
                 }`}
                 onClick={handleClick}
               >
-                {kategori}
+                {category}
               </Button>
             );
           })}
@@ -251,8 +271,8 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
       </div>
       <div className="grid gap-4">
         <Collapsible
-          open={open}
-          onOpenChange={setOpen}
+          open={isFilterOpen}
+          onOpenChange={setIsFilterOpen}
           className="transition duration-"
         >
           <CollapsibleContent className="pt-4 space-y-6 **:rounded-full">
@@ -262,32 +282,31 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
             <div>
               <h4 className="text-sm font-medium mb-2">Jenis Usaha</h4>
               <div className="flex flex-wrap gap-2">
-                {allJenis.map((jenis) => {
+                {allTypes.map((type) => {
                   const selected =
-                    (table.getColumn("jenis")?.getFilterValue() as string[]) ??
+                    (table.getColumn("type")?.getFilterValue() as string[]) ??
                     [];
-                  const isChecked = selected.includes(jenis);
+                  const isChecked = selected.includes(type);
 
                   const handleClick = () => {
                     const current =
-                      (table
-                        .getColumn("jenis")
-                        ?.getFilterValue() as string[]) ?? [];
+                      (table.getColumn("type")?.getFilterValue() as string[]) ??
+                      [];
                     if (isChecked) {
                       table
-                        .getColumn("jenis")
-                        ?.setFilterValue(current.filter((c) => c !== jenis));
+                        .getColumn("type")
+                        ?.setFilterValue(current.filter((c) => c !== type));
                     } else {
                       table
-                        .getColumn("jenis")
-                        ?.setFilterValue([...current, jenis]);
+                        .getColumn("type")
+                        ?.setFilterValue([...current, type]);
                     }
                     table.setPageIndex(0);
                   };
 
                   return (
                     <Button
-                      key={jenis}
+                      key={type}
                       type="button"
                       variant={isChecked ? "default" : "outline"}
                       className={`text-sm px-3 py-1.5 transition-all ${
@@ -297,7 +316,7 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
                       }`}
                       onClick={handleClick}
                     >
-                      {jenis}
+                      {type}
                     </Button>
                   );
                 })}
@@ -308,41 +327,41 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
             <div>
               <h4 className="text-sm font-medium mb-2">Pembayaran</h4>
               <div className="flex flex-wrap gap-2">
-                {allPembayaran.map((pembayaran) => {
+                {allPaymentMethods.map((paymentMethod) => {
                   const selected =
                     (table
-                      .getColumn("pembayaran")
+                      .getColumn("paymentMethods")
                       ?.getFilterValue() as string[]) ?? [];
-                  const isChecked = selected.includes(pembayaran);
+                  const isChecked = selected.includes(paymentMethod);
 
                   const handleClick = () => {
                     const current =
                       (table
-                        .getColumn("pembayaran")
+                        .getColumn("paymentMethods")
                         ?.getFilterValue() as string[]) ?? [];
                     if (isChecked) {
                       table
-                        .getColumn("pembayaran")
+                        .getColumn("paymentMethods")
                         ?.setFilterValue(
-                          current.filter((c) => c !== pembayaran),
+                          current.filter((c) => c !== paymentMethod),
                         );
                       console.log(
                         table
-                          .getColumn("pembayaran")
+                          .getColumn("paymentMethods")
                           ?.setFilterValue(
-                            current.filter((c) => c !== pembayaran),
+                            current.filter((c) => c !== paymentMethod),
                           ),
                       );
                     } else {
                       table
-                        .getColumn("pembayaran")
-                        ?.setFilterValue([...current, pembayaran]);
+                        .getColumn("paymentMethods")
+                        ?.setFilterValue([...current, paymentMethod]);
                     }
                     table.setPageIndex(0);
                   };
                   return (
                     <Button
-                      key={pembayaran}
+                      key={paymentMethod}
                       type="button"
                       variant={isChecked ? "default" : "outline"}
                       className={`text-sm px-3 py-1.5 transition-all ${
@@ -352,7 +371,7 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
                       }`}
                       onClick={handleClick}
                     >
-                      {pembayaran}
+                      {paymentMethod}
                     </Button>
                   );
                 })}
@@ -373,7 +392,7 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
                     <div
                       className="absolute inset-0 bg-center -z-20 bg-cover transition-transform  group-hover:scale-110"
                       style={{
-                        backgroundImage: `url(${row.original.logo_umkm})`,
+                        backgroundImage: `url(${row.original.logo})`,
                       }}
                     ></div>
                     <CardHeader className="justify-self-start aspect-3/1">
@@ -401,17 +420,17 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
                     <CardContent className="mb-4">
                       <div className="relative hover:h-auto">
                         <h3 className="text-lg text-white font-semibold mb-1">
-                          {row.original.nama_usaha}
+                          {row.original.businessName}
                         </h3>
                         <Badge className="text-xs text-white mb-2">
-                          {row.original.kategori}
+                          {row.original.category}
                         </Badge>
                         <p className="text-sm text-slate-200 flex-1 text-ellipsis line-clamp-2">
-                          {row.original.deskripsi}
+                          {row.original.description}
                         </p>
 
                         <div className="mt-3 flex items-center justify-between text-sm text-foreground">
-                          {/* <span>{row.original.nama_pemilik || ""}</span> */}
+                          {/* <span>{row.original.ownerName || ""}</span> */}
                         </div>
                       </div>
                     </CardContent>
@@ -421,7 +440,7 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
                       variant="default"
                       asChild
                     >
-                      <Link href={`/umkm/${row.original.id}`}>Detail</Link>
+                      <Link href={`/business/${row.original.id}`}>Detail</Link>
                     </Button>
                     
                   </CardFooter> */}
