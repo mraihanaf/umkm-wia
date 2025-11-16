@@ -7,14 +7,12 @@ import {
   ColumnDef,
   ColumnFiltersState,
   FilterFn,
-  flexRender,
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Row,
   SortingState,
   useReactTable,
   VisibilityState,
@@ -24,9 +22,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { UMKM } from "@/data/umkmData";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
-import { Funnel, Heart, Search, Slice } from "lucide-react";
+import { Funnel, Heart, Search } from "lucide-react";
 import { Collapsible, CollapsibleContent } from "./ui/collapsible";
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import { Card, CardContent, CardHeader } from "./ui/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -65,22 +63,13 @@ export const columns: ColumnDef<UMKM>[] = [
 ];
 
 export function DataTable({ data: initialData }: { data: UMKM[] }) {
-  const [data, setData] = React.useState(() => initialData);
+  const [data] = React.useState(() => initialData);
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
-  const [filters, setFilters] = React.useState({
-    kategori: [] as string[],
-    jenis: [] as string[],
-    pembayaran: [] as string[],
-    pengiriman: [] as string[],
-    target_pelanggan: [] as string[],
-    tahun_berdiri: [] as number[],
-    rating: 0,
-  });
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
@@ -117,17 +106,6 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
     return result.passed;
   };
 
-  function toggleFilter(key: keyof typeof filters, value: string | number) {
-    setFilters((prev) => {
-      const current = prev[key] as any[];
-      const exists = current.includes(value);
-      const updated = exists
-        ? current.filter((v) => v !== value)
-        : [...current, value];
-      return { ...prev, [key]: updated };
-    });
-  }
-
   const filteredData = React.useMemo(() => {
     return showFavoritesOnly
       ? data.filter((d) => favorites.includes(d.id?.toString() ?? ""))
@@ -153,8 +131,7 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
     onColumnFiltersChange: setColumnFilters,
     globalFilterFn: (row, _columnId, filterValue) => {
       const search = filterValue.toLowerCase();
-      const { nama_usaha, kategori, nama_pemilik, jenis, deskripsi } =
-        row.original;
+      const { nama_usaha, kategori, nama_pemilik, jenis } = row.original;
       return (
         fuzzyFilter(nama_usaha.toLowerCase(), search) ||
         fuzzyFilter(kategori.toLowerCase(), search) ||
@@ -178,9 +155,6 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
   const allJenis = Array.from(new Set(data.map((d) => d.jenis))).sort();
   const allPembayaran = Array.from(
     new Set(data.flatMap((d) => d.pembayaran)),
-  ).sort();
-  const allPengiriman = Array.from(
-    new Set(data.flatMap((d) => d.pengiriman)),
   ).sort();
   console.log(table.getAllColumns());
 
@@ -389,11 +363,6 @@ export function DataTable({ data: initialData }: { data: UMKM[] }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => {
-              const visibleCells = row.getVisibleCells();
-              const data = Object.fromEntries(
-                visibleCells.map((cell) => [cell.column.id, cell.getValue()]),
-              );
-
               return (
                 <Link
                   key={row.id}

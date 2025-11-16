@@ -2,7 +2,6 @@
 import { SiteHeader } from "@/components/site-header";
 import Image from "next/image";
 import { umkmData } from "@/data/umkmData";
-import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table";
 
 export default function Home() {
