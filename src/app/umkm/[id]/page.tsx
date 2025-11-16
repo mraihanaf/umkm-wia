@@ -1,29 +1,15 @@
 "use client";
 // src/pages/DetailUMKMPage.tsx
 // import { useParams } from "react-router-dom";
-import dynamic from "next/dynamic";
-import { useMemo } from "react";
 import { useParams } from "next/navigation";
 import { umkmData } from "@/data/umkmData";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowLeftCircle } from "lucide-react";
-import { SiteHeader } from "@/components/site-header";
+import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
-import UMKMMap from "@/components/map";
 
 export default function DetailUMKMPage() {
   const { id } = useParams<{ id: string }>();
   const umkm = umkmData.find((item) => item.id === id);
-
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("@/components/map"), {
-        loading: () => <p>A map is loading</p>,
-        ssr: false,
-      }),
-    [],
-  );
 
   if (!umkm) {
     return (
@@ -86,9 +72,11 @@ export default function DetailUMKMPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {umkm.nama_produk.map((produk, index) => (
               <div key={index} className="bg-background rounded-xl shadow p-4">
-                <img
+                <Image
                   src={produk.foto}
                   alt={produk.nama}
+                  width={400}
+                  height={160}
                   className="object-cover w-full h-40 rounded-lg mb-3"
                 />
                 <h3 className="font-semibold">{produk.nama}</h3>
