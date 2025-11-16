@@ -50,11 +50,11 @@ export function ImageWithSkeleton({
   }, [src]);
 
   return (
-    <div className="relative">
+    <div className="relative inline-block w-full">
       {isLoading && !isCached && (
         <Skeleton
           className={cn(
-            "absolute inset-0 z-10",
+            "absolute inset-0 z-10 w-full h-full",
             skeletonClassName || className,
           )}
         />
@@ -74,7 +74,7 @@ export function ImageWithSkeleton({
 
           if (
             "onLoadingComplete" in props &&
-            typeof (props as any).onLoadingComplete === "function"
+            typeof (props as any).onLoad === "function"
           ) {
             (props as any).onLoadingComplete(img);
           }

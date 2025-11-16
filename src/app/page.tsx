@@ -63,14 +63,16 @@ export default function Home() {
               </>
             )}
           </div>
-          <ImageWithSkeleton
-            src={"/hero.webp"}
-            alt=""
-            width={2000}
-            height={2000}
-            className="hidden lg:block rounded-md"
-            skeletonClassName="rounded-md"
-          />
+          <div className="hidden lg:block w-full">
+            <ImageWithSkeleton
+              src={"/hero.webp"}
+              alt=""
+              width={1280}
+              height={720}
+              className="rounded-md w-full h-auto"
+              skeletonClassName="rounded-md"
+            />
+          </div>
         </div>
         <DataTable data={smallBusinessData} />
       </div>
