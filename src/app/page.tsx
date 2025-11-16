@@ -22,7 +22,7 @@ export default function Home() {
             </p>
           </div>
           <Image
-            src={"/hero.png"}
+            src={"/hero.webp"}
             alt=""
             width={2000}
             height={2000}

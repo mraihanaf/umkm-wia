@@ -28,22 +28,22 @@
       {
         "nama": "Kopi Susu Senja",
         "harga": 22000,
-        "foto": "foto/kopi/kopi-susu-senja.jpg"
+        "foto": "foto/kopi/kopi-susu-senja.webp"
       },
       {
         "nama": "Americano Lokal",
         "harga": 18000,
-        "foto": "foto/kopi/americano.jpg"
+        "foto": "foto/kopi/americano.webp"
       },
       {
         "nama": "Croissant Cokelat",
         "harga": 25000,
-        "foto": "foto/kopi/croissant.jpg"
+        "foto": "foto/kopi/croissant.webp"
       }
     ],
     "kategori": "Minuman/Kopi",
-    "logo_umkm": "logo/kopisenja.png",
-    "gallery": ["galeri/kopi1.jpg", "galeri/kopi2.jpg", "galeri/kopi3.jpg"],
+    "logo_umkm": "logo/kopisenja.webp",
+    "gallery": ["galeri/kopi1.webp", "galeri/kopi2.webp", "galeri/kopi3.webp"],
     "video": "video/kopisenja-intro.mp4",
     "sosial_media": { "instagram": "@kopisenja.id", "twitter": "" },
     "ratings": { "rata_rata": 4.7, "jumlah_review": 150 },
@@ -86,22 +86,22 @@
       {
         "nama": "Bakso Urat Jumbo",
         "harga": 30000,
-        "foto": "foto/bakso/urat-jumbo.jpg"
+        "foto": "foto/bakso/urat-jumbo.webp"
       },
       {
         "nama": "Mie Ayam Bakso",
         "harga": 25000,
-        "foto": "foto/bakso/mie-ayam-bakso.jpg"
+        "foto": "foto/bakso/mie-ayam-bakso.webp"
       },
       {
         "nama": "Es Campur",
         "harga": 15000,
-        "foto": "foto/bakso/es-campur.jpg"
+        "foto": "foto/bakso/es-campur.webp"
       }
     ],
     "kategori": "Makanan",
-    "logo_umkm": "logo/baksolima.png",
-    "gallery": ["galeri/bakso1.jpg", "galeri/bakso2.jpg", "galeri/bakso3.jpg"],
+    "logo_umkm": "logo/baksolima.webp",
+    "gallery": ["galeri/bakso1.webp", "galeri/bakso2.webp", "galeri/bakso3.webp"],
     "video": "video/bakso-review.mp4",
     "sosial_media": {
       "instagram": "@baksolimalegend",
@@ -147,22 +147,22 @@
       {
         "nama": "Roti Bakar Keju Meleleh",
         "harga": 20000,
-        "foto": "foto/roti/keju.jpg"
+        "foto": "foto/roti/keju.webp"
       },
       {
         "nama": "Roti Bakar Milo Dinosaurs",
         "harga": 25000,
-        "foto": "foto/roti/milo.jpg"
+        "foto": "foto/roti/milo.webp"
       },
       {
         "nama": "Indomie Rebus Spesial",
         "harga": 15000,
-        "foto": "foto/roti/indomie.jpg"
+        "foto": "foto/roti/indomie.webp"
       }
     ],
     "kategori": "Makanan",
-    "logo_umkm": "logo/rotiviral.png",
-    "gallery": ["galeri/roti1.jpg", "galeri/roti2.jpg"],
+    "logo_umkm": "logo/rotiviral.webp",
+    "gallery": ["galeri/roti1.webp", "galeri/roti2.webp"],
     "video": "",
     "sosial_media": { "instagram": "@rotimantu", "tiktok": "rotimantu.viral" },
     "ratings": { "rata_rata": 4.9, "jumlah_review": 98 },
@@ -205,18 +205,18 @@
       {
         "nama": "Haircut & Wash",
         "harga": 50000,
-        "foto": "foto/jasa/haircut.jpg"
+        "foto": "foto/jasa/haircut.webp"
       },
-      { "nama": "Shaving", "harga": 30000, "foto": "foto/jasa/shaving.jpg" },
+      { "nama": "Shaving", "harga": 30000, "foto": "foto/jasa/shaving.webp" },
       {
         "nama": "Hair Tonic Treatment",
         "harga": 20000,
-        "foto": "foto/jasa/tonic.jpg"
+        "foto": "foto/jasa/tonic.webp"
       }
     ],
     "kategori": "Jasa",
-    "logo_umkm": "logo/barberbudi.png",
-    "gallery": ["galeri/barber1.jpg", "galeri/barber2.jpg"],
+    "logo_umkm": "logo/barberbudi.webp",
+    "gallery": ["galeri/barber1.webp", "galeri/barber2.webp"],
     "video": "",
     "sosial_media": { "instagram": "@pangkasbudi" },
     "ratings": { "rata_rata": 4.8, "jumlah_review": 120 },
@@ -259,22 +259,22 @@
       {
         "nama": "Kursi Rotan Malaka",
         "harga": 750000,
-        "foto": "foto/kerajinan/kursi.jpg"
+        "foto": "foto/kerajinan/kursi.webp"
       },
       {
         "nama": "Lampu Gantung Bambu",
         "harga": 150000,
-        "foto": "foto/kerajinan/lampu.jpg"
+        "foto": "foto/kerajinan/lampu.webp"
       },
       {
         "nama": "Anyaman Hias Dinding",
         "harga": 80000,
-        "foto": "foto/kerajinan/anyaman.jpg"
+        "foto": "foto/kerajinan/anyaman.webp"
       }
     ],
     "kategori": "Ritel",
-    "logo_umkm": "logo/endangrotan.png",
-    "gallery": ["galeri/rotan1.jpg", "galeri/rotan2.jpg", "galeri/rotan3.jpg"],
+    "logo_umkm": "logo/endangrotan.webp",
+    "gallery": ["galeri/rotan1.webp", "galeri/rotan2.webp", "galeri/rotan3.webp"],
     "video": "video/rotan-proses.mp4",
     "sosial_media": { "website": "www.rotanendang.com" },
     "ratings": { "rata_rata": 4.6, "jumlah_review": 65 },
@@ -317,22 +317,22 @@
       {
         "nama": "Sate Sapi Jumbo",
         "harga": 35000,
-        "foto": "foto/sate/sapi.jpg"
+        "foto": "foto/sate/sapi.webp"
       },
       {
         "nama": "Sate Ayam Kuah Kuning",
         "harga": 28000,
-        "foto": "foto/sate/ayam.jpg"
+        "foto": "foto/sate/ayam.webp"
       },
       {
         "nama": "Nasi Goreng Padang",
         "harga": 25000,
-        "foto": "foto/sate/nasgor.jpg"
+        "foto": "foto/sate/nasgor.webp"
       }
     ],
     "kategori": "Makanan",
-    "logo_umkm": "logo/satepetir.png",
-    "gallery": ["galeri/sate1.jpg", "galeri/sate2.jpg"],
+    "logo_umkm": "logo/satepetir.webp",
+    "gallery": ["galeri/sate1.webp", "galeri/sate2.webp"],
     "video": "",
     "sosial_media": { "instagram": "@satepadangpetir" },
     "ratings": { "rata_rata": 4.4, "jumlah_review": 210 },
@@ -375,22 +375,22 @@
       {
         "nama": "Kaos 'Senja di Kota'",
         "harga": 120000,
-        "foto": "foto/kaos/senja.jpg"
+        "foto": "foto/kaos/senja.webp"
       },
       {
         "nama": "Jaket Hoodie Katun",
         "harga": 250000,
-        "foto": "foto/kaos/hoodie.jpg"
+        "foto": "foto/kaos/hoodie.webp"
       },
       {
         "nama": "Sticker Pack V.2",
         "harga": 20000,
-        "foto": "foto/kaos/sticker.jpg"
+        "foto": "foto/kaos/sticker.webp"
       }
     ],
     "kategori": "Ritel",
-    "logo_umkm": "logo/distroindie.png",
-    "gallery": ["galeri/distro1.jpg", "galeri/distro2.jpg"],
+    "logo_umkm": "logo/distroindie.webp",
+    "gallery": ["galeri/distro1.webp", "galeri/distro2.webp"],
     "video": "video/distro-tour.mp4",
     "sosial_media": {
       "instagram": "@kaosindie_bdg",
@@ -438,8 +438,8 @@
       { "nama": "Setrika Saja (per kg)", "harga": 5000, "foto": "" }
     ],
     "kategori": "Jasa",
-    "logo_umkm": "logo/laundry.png",
-    "gallery": ["galeri/laundry1.jpg", "galeri/laundry2.jpg"],
+    "logo_umkm": "logo/laundry.webp",
+    "gallery": ["galeri/laundry1.webp", "galeri/laundry2.webp"],
     "video": "",
     "sosial_media": { "whatsapp": "6287899887766" },
     "ratings": { "rata_rata": 4.3, "jumlah_review": 75 },
@@ -482,22 +482,22 @@
       {
         "nama": "Martabak 8 Rasa",
         "harga": 80000,
-        "foto": "foto/martabak/8rasa.jpg"
+        "foto": "foto/martabak/8rasa.webp"
       },
       {
         "nama": "Martabak Telur Daging Sapi",
         "harga": 45000,
-        "foto": "foto/martabak/telur.jpg"
+        "foto": "foto/martabak/telur.webp"
       },
       {
         "nama": "Terang Bulan Keju",
         "harga": 35000,
-        "foto": "foto/martabak/terangbulan.jpg"
+        "foto": "foto/martabak/terangbulan.webp"
       }
     ],
     "kategori": "Makanan",
-    "logo_umkm": "logo/martabaksultan.png",
-    "gallery": ["galeri/martabak1.jpg", "galeri/martabak2.jpg"],
+    "logo_umkm": "logo/martabaksultan.webp",
+    "gallery": ["galeri/martabak1.webp", "galeri/martabak2.webp"],
     "video": "",
     "sosial_media": { "instagram": "@martabaksultan" },
     "ratings": { "rata_rata": 4.6, "jumlah_review": 180 },
@@ -540,22 +540,22 @@
       {
         "nama": "Servis Ringan + Oli",
         "harga": 150000,
-        "foto": "foto/bengkel/servis.jpg"
+        "foto": "foto/bengkel/servis.webp"
       },
       {
         "nama": "Ganti Ban Luar",
         "harga": 100000,
-        "foto": "foto/bengkel/ban.jpg"
+        "foto": "foto/bengkel/ban.webp"
       },
       {
         "nama": "Ganti Kampas Rem",
         "harga": 50000,
-        "foto": "foto/bengkel/rem.jpg"
+        "foto": "foto/bengkel/rem.webp"
       }
     ],
     "kategori": "Jasa",
-    "logo_umkm": "logo/jagoanbaut.png",
-    "gallery": ["galeri/bengkel1.jpg", "galeri/bengkel2.jpg"],
+    "logo_umkm": "logo/jagoanbaut.webp",
+    "gallery": ["galeri/bengkel1.webp", "galeri/bengkel2.webp"],
     "video": "",
     "sosial_media": { "facebook": "Bengkel Jagoan Baut" },
     "ratings": { "rata_rata": 4.1, "jumlah_review": 95 },
@@ -598,18 +598,18 @@
       {
         "nama": "Kue Lapis Legit",
         "harga": 150000,
-        "foto": "foto/kue/lapis.jpg"
+        "foto": "foto/kue/lapis.webp"
       },
       {
         "nama": "Kue Brownies Cokelat",
         "harga": 75000,
-        "foto": "foto/kue/brownies.jpg"
+        "foto": "foto/kue/brownies.webp"
       },
-      { "nama": "Nastar Toples", "harga": 50000, "foto": "foto/kue/nastar.jpg" }
+      { "nama": "Nastar Toples", "harga": 50000, "foto": "foto/kue/nastar.webp" }
     ],
     "kategori": "Makanan",
-    "logo_umkm": "logo/mamaniakue.png",
-    "gallery": ["galeri/kue1.jpg", "galeri/kue2.jpg"],
+    "logo_umkm": "logo/mamaniakue.webp",
+    "gallery": ["galeri/kue1.webp", "galeri/kue2.webp"],
     "video": "",
     "sosial_media": { "whatsapp": "6285600112233" },
     "ratings": { "rata_rata": 4.8, "jumlah_review": 105 },
@@ -654,8 +654,8 @@
       { "nama": "Binding Skripsi", "harga": 35000, "foto": "" }
     ],
     "kategori": "Jasa",
-    "logo_umkm": "logo/cepatkilat.png",
-    "gallery": ["galeri/jasa-print.jpg"],
+    "logo_umkm": "logo/cepatkilat.webp",
+    "gallery": ["galeri/jasa-print.webp"],
     "video": "",
     "sosial_media": { "whatsapp": "6281611223344" },
     "ratings": { "rata_rata": 4.5, "jumlah_review": 110 },
@@ -698,22 +698,22 @@
       {
         "nama": "Paket Foto Keluarga (1 jam)",
         "harga": 450000,
-        "foto": "foto/studio/keluarga.jpg"
+        "foto": "foto/studio/keluarga.webp"
       },
       {
         "nama": "Pas Foto Lamaran",
         "harga": 75000,
-        "foto": "foto/studio/pasfoto.jpg"
+        "foto": "foto/studio/pasfoto.webp"
       },
       {
         "nama": "Sewa Kostum Wisuda",
         "harga": 100000,
-        "foto": "foto/studio/wisuda.jpg"
+        "foto": "foto/studio/wisuda.webp"
       }
     ],
     "kategori": "Jasa",
-    "logo_umkm": "logo/jepretceria.png",
-    "gallery": ["galeri/foto1.jpg", "galeri/foto2.jpg", "galeri/foto3.jpg"],
+    "logo_umkm": "logo/jepretceria.webp",
+    "gallery": ["galeri/foto1.webp", "galeri/foto2.webp", "galeri/foto3.webp"],
     "video": "video/studio-behind-scene.mp4",
     "sosial_media": { "instagram": "@jepretceria", "website": "" },
     "ratings": { "rata_rata": 4.7, "jumlah_review": 130 },
